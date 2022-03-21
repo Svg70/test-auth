@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import AvatarCircle from '../../components/Avatar';
 import { btnstyle, paperStyle } from '../../constants/styles';
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
   const {
@@ -19,6 +20,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const [login] = useMutation(LOGIN);
   const [submitError, setSubmitError] = useState<string>();
+
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const onSubmit = (data: any) => {
     setSubmitError('');
@@ -33,6 +36,9 @@ const Login = () => {
         id: data.login.user.id,
         token: data.login.token,
       }));
+      setCookie('token', data.login.token);
+      setCookie('email', data.login.user.email);
+      setCookie('id', data.login.user.id);
     }).catch((err) => {
       setSubmitError('Query error');
     })

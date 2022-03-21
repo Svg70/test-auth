@@ -11,6 +11,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { СREATE_POST, GET_POSTS } from '../../dal/posts';
 import { btnstyle } from '../../constants/styles';
 import { useAppSelector } from '../../hooks/redux';
+import { useCookies } from 'react-cookie';
 
 interface IPost {
   title: string;
@@ -18,9 +19,13 @@ interface IPost {
 }
 
 const Posts = () => {
+  const [cookies, setCookie, removeCookie] = useCookies();
   const dispatch = useDispatch();
   const signOut = () => {
-    dispatch(removeUser())
+    dispatch(removeUser());
+    removeCookie('token');
+    removeCookie('id');
+    removeCookie('email');
   };
 
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -66,6 +71,8 @@ const Posts = () => {
       setSubmitError(`Query error`)
     })
   };
+
+  
 
   return (
     <>

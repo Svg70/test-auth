@@ -5,9 +5,24 @@ import Reset from './pages/reset/reset';
 import Posts from './pages/posts/posts';
 import PrivateRoute from './components/PrivateRouter';
 import NotAuthRouter from './components/NotAuthRouter';
+import { useCookies } from "react-cookie";
+import { setUser } from "./store/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies();
+
+  const dispatch = useDispatch();
+
+  if (cookies.token && cookies.email && cookies.id) {
+    dispatch(setUser({
+      email: cookies.email,
+      id: cookies.id,
+      token: cookies.token,
+    }));
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" />}></Route>

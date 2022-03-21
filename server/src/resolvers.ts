@@ -53,7 +53,7 @@ export const resolvers = {
   
       //@ts-ignore
       const accessToken = sign({ userId: user.id }, ACCESS_TOKEN_SECRET, {
-        expiresIn: "15min"
+        expiresIn: "60min"
       });
 
       // const refreshToken = sign(
@@ -103,8 +103,7 @@ export const resolvers = {
       if (!user) {
         return null;
       }
-
-      //@ts-ignore
+      
       const note = await Note.create({
         title,
         //@ts-ignore

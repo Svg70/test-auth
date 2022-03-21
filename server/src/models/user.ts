@@ -44,14 +44,11 @@ interface NoteAttributes {
   id: number;
   title: string;
   createdAt?: Date;
-  //userId: number 
 }
 
 export class Note extends Model<NoteAttributes> implements NoteAttributes {
   public id!: number
   public title!: string
-  //public userId!: number
-  //public readonly created_at: Date
   // timestamps!
   public readonly createdAt!: Date;
 }
