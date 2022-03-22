@@ -14,7 +14,6 @@
     ### `npm install`
     ### `npm run start`
 2. Client part settings:
-    ### `cd ../`
     ### `cd client`
     ### `npm install`
     ### `npm run start`
